@@ -1,0 +1,68 @@
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.select-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f4f8;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-option {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancel-button {
+  padding: 8px 16px;
+  background-color: #f6f8fa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: #e2e8f0;
+}
+
+.book-button {
+  padding: 8px 16px;
+  background-color: #4e9af1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.book-button:hover {
+  background-color: #367edb;
+}
