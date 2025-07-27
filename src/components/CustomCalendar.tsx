@@ -38,6 +38,7 @@ type CustomCalendarProps = {
   setSelectedClient: React.Dispatch<React.SetStateAction<SelectedClientType | null>>;
   setCallType: React.Dispatch<React.SetStateAction<CallType | "">>;
   handleGetBookings: () => void;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function CustomCalendar({
@@ -49,12 +50,14 @@ export default function CustomCalendar({
   setWarning,
   setSelectedClient,
   setCallType,
-  handleGetBookings
+  handleGetBookings,
+  setLoading
 }: CustomCalendarProps) {
   const clientName = selectedClient?.clientName || "";
   const phone = selectedClient?.phone || "";
 
   async function handleAddBooking(booking: Omit<BookingType, "id">) {
+    setLoading(true);
     try {
       const response = await axios.post("https://railwayserverhealthtick-production.up.railway.app/api/addBooking", booking);
       if (response.status === 200) {
@@ -65,6 +68,7 @@ export default function CustomCalendar({
       }
     } catch (error) {
       console.error("Error adding booking:", error);
+      setLoading(false);
       alert("An error occurred while adding booking.");
     }
   }
@@ -116,7 +120,6 @@ export default function CustomCalendar({
         phone,
         callType
       };
-
       handleAddBooking(newBooking);
     } else if (callType === "followup") {
       const newBooking: Omit<BookingType, "id"> = {
@@ -127,7 +130,6 @@ export default function CustomCalendar({
         phone,
         callType
       };
-
       handleAddBooking(newBooking);
     }
 
@@ -136,6 +138,7 @@ export default function CustomCalendar({
   };
 
   async function handleDeleteBooking(id: string) {
+    setLoading(true);
     try {
       const response = await axios.delete(`https://railwayserverhealthtick-production.up.railway.app/api/deleteBookings/${id}`);
       if (response.status === 200) {
@@ -146,6 +149,7 @@ export default function CustomCalendar({
       }
     } catch (error) {
       console.error("Error deleting booking:", error);
+      setLoading(false);
       alert("An error occurred while deleting booking.");
     }
   }

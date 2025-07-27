@@ -10,6 +10,7 @@ import LeftArrow from "../assets/leftArrow.svg";
 import axios from "axios";
 import type { BookingType, UserType, CallType, SelectedClientType } from "../types";
 import "./Calender.css";
+import { BounceLoader } from 'react-spinners';
 
 function MainPage() {
   const [clients, setClients] = useState<UserType[]>([]);
@@ -19,6 +20,7 @@ function MainPage() {
   const [bookings, setBookings] = useState<BookingType[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [warning, setWarning] = useState<string>("");
+  const [loading, setLoading]=useState<boolean>(false);
 
   const handleGetUsers = async () => {
     try {
@@ -34,9 +36,11 @@ function MainPage() {
       const response = await axios.get<BookingType[]>("https://railwayserverhealthtick-production.up.railway.app/api/getBookings");
       if (response.status === 200) {
         setBookings(response.data);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching bookings:", error);
+      setLoading(false);
     }
   };
 
@@ -90,6 +94,11 @@ function MainPage() {
             <img src={LeftArrow} width="20px" height="20px" />
           </button>
 
+          {loading && (
+            <div >
+              <BounceLoader color="#6FA5DB" />
+            </div>
+          )}
           <h3 className="text-center text-lg font-semibold">{format(currentDate, "EEEE, d MMMM yyyy")}</h3>
 
           <button
@@ -112,6 +121,7 @@ function MainPage() {
               setSelectedClient={setSelectedClient}
               setCallType={setCallType}
               handleGetBookings={handleGetBookings}
+              setLoading={setLoading}
             />
           </div>
         </div>
