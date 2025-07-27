@@ -45,6 +45,7 @@ function MainPage() {
   };
 
   useEffect(() => {
+    setLoading(true);
     handleGetUsers();
     handleGetBookings();
   }, []);
